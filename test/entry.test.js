@@ -8,7 +8,7 @@ describe('entry', () => {
     const info = {
       required: true
     }
-    const messages = validate(info, ' ', 'en')
+    const messages = validate(info, ' ')
     expect(messages).toEqual([
       {
         id: 'SUMOR_REQUIRED',

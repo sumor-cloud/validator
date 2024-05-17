@@ -22,7 +22,7 @@ const format = (info, value) => {
   return formattedValue
 }
 
-const validate = (info, value, language) => {
+const validate = (info, value, language = 'en-US') => {
   info = parseInfo(info)
 
   let formattedValue = value
