@@ -22,4 +22,12 @@ describe('number formatter', () => {
     expect(isNaN(format(parseInfo({ type: 'number' }), ''))).toBe(false)
     expect(isNaN(format(parseInfo({ type: 'number' }), 'abc'))).toBe(true)
   })
+
+  it('format default', () => {
+    expect(format(parseInfo({ type: 'number', default: 123 }), '')).toBe(123)
+    expect(format(parseInfo({ type: 'number', default: 123 }), null)).toBe(123)
+    expect(format(parseInfo({ type: 'number', default: 123 }), undefined)).toBe(123)
+    expect(format(parseInfo({ type: 'number', default: 123 }), '456')).toBe(456)
+    expect(format(parseInfo({ type: 'number', default: 123 }), 456)).toBe(456)
+  })
 })

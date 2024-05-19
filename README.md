@@ -153,15 +153,52 @@ console.log(messages5) // [ '值應大於5' ]
 
 ### Format String Usage
 
+##### Trim Usage
+
+will remove the useless space for prefix and suffix
+
 ```js
 import { format } from '@sumor/validator'
 
 const parameterInfo = {
-  type: 'string'
+  type: 'string',
+  trim: true // default is true for string type
 }
 
-const value1 = format(parameterInfo, ' demo ')
-console.log(value1) // will print "demo", useless space will be removed
+const value = format(parameterInfo, ' demo ')
+console.log(value) // will print "demo", useless space will be removed
+```
+
+##### Lowercase Usage
+
+will convert the string to lowercase
+
+```js
+import { format } from '@sumor/validator'
+
+const parameterInfo = {
+  type: 'string',
+  lowercase: true
+}
+
+const value = format(parameterInfo, 'Demo')
+console.log(value) // will print "demo", all characters will be converted to lowercase
+```
+
+##### Uppercase Usage
+
+will convert the string to uppercase
+
+```js
+import { format } from '@sumor/validator'
+
+const parameterInfo = {
+  type: 'string',
+  uppercase: true
+}
+
+const value = format(parameterInfo, 'Demo')
+console.log(value) // will print "DEMO", all characters will be converted to uppercase
 ```
 
 ### Format Number Usage
