@@ -33,7 +33,9 @@ const validate = (info, value, language = 'en-US') => {
     case 'string':
       formattedValue = stringFormat(info, value)
       messages = stringValidate(info, formattedValue)
-      valueLength = formattedValue.length
+      if (formattedValue) {
+        valueLength = formattedValue.length
+      }
       break
     case 'number':
       formattedValue = numberFormat(info, value)
