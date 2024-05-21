@@ -13,7 +13,8 @@
     "validator"
   ],
   "dependencies": {
-    "@sumor/i18n": "^1.0.1"
+    "@sumor/i18n": "^1.0.2",
+    "@sumor/error": "^1.0.3"
   },
   "devDependencies": {
     "@jest/globals": "^29.7.0",

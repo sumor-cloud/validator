@@ -1,6 +1,15 @@
 import official from './official.js'
-import getI18n from '@sumor/i18n'
-export default (language, config) => {
+export default (language, info) => {
+  info = info || {}
+  const i18n = info.i18n || {}
+  const config = {
+    origin: {},
+    ...i18n
+  }
+  for (const i in info.rule) {
+    const rule = info.rule[i]
+    config.origin[rule.code] = rule.message
+  }
   const mergedConfig = Object.assign({}, config)
   for (const language in official) {
     mergedConfig[language] = mergedConfig[language] || {}
@@ -8,5 +17,5 @@ export default (language, config) => {
       mergedConfig[language][key] = mergedConfig[language][key] || official[language][key]
     }
   }
-  return getI18n(language, mergedConfig)
+  return mergedConfig
 }

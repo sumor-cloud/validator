@@ -13,7 +13,7 @@ export default (info, value) => {
     if (rule.expression) {
       const regexp = new RegExp(rule.expression)
       if (!regexp.test(value)) {
-        messages.push(rule.id)
+        messages.push(rule.code)
       }
     }
   }

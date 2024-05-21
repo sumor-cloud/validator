@@ -4,9 +4,11 @@ import stringValidate from './string/validate.js'
 import numberFormat from './number/format.js'
 import numberValidate from './number/validate.js'
 import getI18n from './i18n/index.js'
+import getError from './error/index.js'
 
 const format = (info, value) => {
   info = parseInfo(info)
+  info.error = !!info.error // if error is true, will return error object
 
   let formattedValue = value
 
@@ -50,22 +52,33 @@ const validate = (info, value, language = 'en-US') => {
     if (rule.function) {
       const result = rule.function(formattedValue, info, language)
       if (!result) {
-        messages.push(rule.id)
+        messages.push(rule.code)
       }
     }
   }
 
-  const i18n = getI18n(language, info)
-  messages = messages.map(message => {
-    return {
-      id: message,
-      message: i18n(message, {
+  if (info.error) {
+    const ValidationError = getError(language, info)
+    messages = messages.map(message => {
+      return new ValidationError(message, {
         value,
         currentLength: valueLength,
         ...info
       })
-    }
-  })
+    })
+  } else {
+    const i18n = getI18n(language, info)
+    messages = messages.map(message => {
+      return {
+        code: message,
+        message: i18n(message, {
+          value,
+          currentLength: valueLength,
+          ...info
+        })
+      }
+    })
+  }
 
   return messages
 }

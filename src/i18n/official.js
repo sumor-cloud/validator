@@ -1,4 +1,10 @@
 export default {
+  origin: {
+    SUMOR_REQUIRED: 'Mandatory field',
+    SUMOR_STRING_LENGTH: 'Length must be less than or equal to {length} characters',
+    SUMOR_INVALID_NUMBER: 'Invalid number {value}',
+    SUMOR_NUMBER_LENGTH: 'Length must be less than or equal to {length} digits'
+  },
   en: {
     SUMOR_REQUIRED: 'Mandatory field',
     SUMOR_STRING_LENGTH: 'Length must be less than or equal to {length} characters',

@@ -31,7 +31,7 @@ describe('parse info', () => {
     const result5 = parseInfo({
       rule: [{}]
     })
-    expect(result5.rule[0].id).toBe('TMP_RULE_1')
+    expect(result5.rule[0].code).toBe('TMP_RULE_1')
     expect(result5.rule[0].message).toBe('')
   })
   it('number', () => {

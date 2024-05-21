@@ -22,7 +22,7 @@ export default info => {
 
   for (let i = 0; i < info.rule.length; i++) {
     const rule = info.rule[i]
-    rule.id = rule.id || `TMP_RULE_${i + 1}`
+    rule.code = rule.code || `TMP_RULE_${i + 1}`
     rule.message = rule.message || ''
   }
 

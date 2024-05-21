@@ -19,7 +19,7 @@ export default (info, value) => {
   // for(let rule of info.rule){
   //     const regexp = new RegExp(rule.expression)
   //     if(!regexp.test(value)){
-  //         messages.push(rule.id)
+  //         messages.push(rule.code)
   //     }
   // }
 

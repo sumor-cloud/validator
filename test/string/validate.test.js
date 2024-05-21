@@ -51,7 +51,7 @@ describe('String Validator', () => {
       rule: [
         // only allow a-z, A-Z, 0-9
         {
-          id: 'RULE1',
+          code: 'RULE1',
           expression: '^[a-zA-Z0-9]*$',
           message: 'only allow a-z, A-Z, 0-9'
         },
@@ -61,7 +61,7 @@ describe('String Validator', () => {
           message: 'need include demo'
         },
         {
-          id: 'DUMMY_RULE',
+          code: 'DUMMY_RULE',
           message: 'dummy rule'
         }
       ],

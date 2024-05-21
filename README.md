@@ -48,19 +48,19 @@ const parameterInfo = {
   rule: [
     // only allow a-z, A-Z, 0-9
     {
-      id: 'ONLY_CHAR_DIGIT',
+      code: 'ONLY_CHAR_DIGIT',
       expression: '^[a-zA-Z0-9]*$',
       message: 'only allow a-z, A-Z, 0-9'
     },
     // need include demo
     {
-      id: 'INCLUDE_DEMO',
+      code: 'INCLUDE_DEMO',
       expression: 'demo',
       message: 'need include demo'
     },
     // use function to check
     {
-      id: 'LENGTH_GREATER_THAN_5',
+      code: 'LENGTH_GREATER_THAN_5',
       expression: value => {
         return value.length > 5
       },
@@ -116,7 +116,7 @@ const parameterInfo = {
   rule: [
     // need greater than 5
     {
-      id: 'GREATER_THAN_5',
+      code: 'GREATER_THAN_5',
       expression: value => {
         return value > 5
       },

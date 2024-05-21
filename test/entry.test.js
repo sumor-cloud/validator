@@ -11,7 +11,7 @@ describe('entry', () => {
     const messages = validate(info, ' ')
     expect(messages).toEqual([
       {
-        id: 'SUMOR_REQUIRED',
+        code: 'SUMOR_REQUIRED',
         message: official.en.SUMOR_REQUIRED
       }
     ])
@@ -24,7 +24,7 @@ describe('entry', () => {
     const messages = validate(info, value, 'en')
     expect(messages).toEqual([
       {
-        id: 'SUMOR_STRING_LENGTH',
+        code: 'SUMOR_STRING_LENGTH',
         message: official.en.SUMOR_STRING_LENGTH.replace('{length}', info.length)
       }
     ])
@@ -38,7 +38,7 @@ describe('entry', () => {
     const messages1 = validate(info, value, 'zh-CN')
     expect(messages1).toEqual([
       {
-        id: 'SUMOR_STRING_LENGTH',
+        code: 'SUMOR_STRING_LENGTH',
         message: official.zh.SUMOR_STRING_LENGTH.replace('{length}', info.length)
       }
     ])
@@ -46,7 +46,7 @@ describe('entry', () => {
     const messages2 = validate(info, value, 'ar-EG')
     expect(messages2).toEqual([
       {
-        id: 'SUMOR_STRING_LENGTH',
+        code: 'SUMOR_STRING_LENGTH',
         message: official.ar.SUMOR_STRING_LENGTH.replace('{length}', info.length)
       }
     ])
@@ -54,7 +54,7 @@ describe('entry', () => {
     const messages3 = validate(info, value, 'fr-FR')
     expect(messages3).toEqual([
       {
-        id: 'SUMOR_STRING_LENGTH',
+        code: 'SUMOR_STRING_LENGTH',
         message: official.fr.SUMOR_STRING_LENGTH.replace('{length}', info.length)
       }
     ])
@@ -64,7 +64,7 @@ describe('entry', () => {
       rule: [
         // only allow a-z, A-Z, 0-9
         {
-          id: 'RULE1',
+          code: 'RULE1',
           expression: '^[a-zA-Z0-9]*$',
           message: 'only allow a-z, A-Z, 0-9'
         },
@@ -86,25 +86,25 @@ describe('entry', () => {
     const messages2 = validate(info, 'de1234567', 'zh-TW')
     expect(messages2).toEqual([
       {
-        id: 'TMP_RULE_2',
+        code: 'TMP_RULE_2',
         message: 'need include demo'
       }
     ])
     const messages3 = validate(info, 'demo!', 'zh-TW')
     expect(messages3).toEqual([
       {
-        id: 'RULE1',
+        code: 'RULE1',
         message: '只允许输入字母和数字'
       }
     ])
     const messages4 = validate(info, 'de!mo', 'zh-TW')
     expect(messages4).toEqual([
       {
-        id: 'RULE1',
+        code: 'RULE1',
         message: '只允许输入字母和数字'
       },
       {
-        id: 'TMP_RULE_2',
+        code: 'TMP_RULE_2',
         message: 'need include demo'
       }
     ])
@@ -116,7 +116,7 @@ describe('entry', () => {
     const messages = validate(info, 'a12b', 'en')
     expect(messages).toEqual([
       {
-        id: 'SUMOR_INVALID_NUMBER',
+        code: 'SUMOR_INVALID_NUMBER',
         message: official.en.SUMOR_INVALID_NUMBER.replace('{value}', 'a12b')
       }
     ])
@@ -129,7 +129,7 @@ describe('entry', () => {
     const messages = validate(info, '123456', 'en')
     expect(messages).toEqual([
       {
-        id: 'SUMOR_NUMBER_LENGTH',
+        code: 'SUMOR_NUMBER_LENGTH',
         message: official.en.SUMOR_NUMBER_LENGTH.replace('{length}', 5)
       }
     ])
@@ -139,7 +139,7 @@ describe('entry', () => {
       type: 'number',
       rule: [
         {
-          id: 'RULE1',
+          code: 'RULE1',
           function: (value, info, language) => {
             return value > 100
           },
@@ -158,14 +158,14 @@ describe('entry', () => {
     const messages2 = validate(info, '99', 'en')
     expect(messages2).toEqual([
       {
-        id: 'RULE1',
+        code: 'RULE1',
         message: 'need value > 100, current value is 99'
       }
     ])
     const messages3 = validate(info, '99', 'zh')
     expect(messages3).toEqual([
       {
-        id: 'RULE1',
+        code: 'RULE1',
         message: '必须大于100，当前值是99'
       }
     ])
@@ -185,5 +185,18 @@ describe('entry', () => {
     const value = '  123  '
     const formattedValue = format(info, value)
     expect(formattedValue).toEqual(123)
+  })
+  it('change output to error', () => {
+    const info = {
+      error: true,
+      type: 'string',
+      required: true
+    }
+    const value = ' '
+    const errors = validate(info, value)
+    const error = errors[0]
+    expect(error.name).toEqual('SumorError')
+    expect(error.code).toEqual('SUMOR_REQUIRED')
+    expect(error.message).toEqual(official.en.SUMOR_REQUIRED)
   })
 })
