@@ -1,3 +1,4 @@
+// languages: en, zh, es, fr, de, ja, ko, ru, pt, ar
 export default {
   origin: {
     SUMOR_REQUIRED: 'Mandatory field',
