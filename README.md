@@ -217,3 +217,37 @@ console.log(value1) // will print 1.23, only keep 2 decimal
 const value2 = format(parameterInfo, '1.234')
 console.log(value2) // will convert to number 1.23, only keep 2 decimal
 ```
+
+### Enable Output Error
+
+If you pass error:true, response will be an SumorError object.
+You can change language and export json support by [@sumor/error](https://www.npmjs.com/package/@sumor/error)
+
+```js
+import { validate } from '@sumor/validator'
+
+const parameterInfo = {
+  type: 'string',
+  required: true,
+  length: 10,
+  rule: [
+    {
+      code: 'LENGTH_GREATER_THAN_5',
+      expression: value => {
+        return value.length > 5
+      },
+      message: 'length should be greater than 5'
+    }
+  ]
+}
+
+const messages = validate(parameterInfo, 'demo123456', 'en', true)
+console.log(messages) 
+/* 
+SumorError
+{
+  code: 'LENGTH_GREATER_THAN_5',
+  message: 'length should be greater than 5'
+}
+*/
+```
