@@ -227,6 +227,7 @@ You can change language and export json support by [@sumor/error](https://www.np
 import { validate } from '@sumor/validator'
 
 const parameterInfo = {
+  error: true,
   type: 'string',
   required: true,
   length: 10,
