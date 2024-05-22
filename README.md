@@ -242,7 +242,7 @@ const parameterInfo = {
   ]
 }
 
-const messages = validate(parameterInfo, 'demo123456', 'en', true)
+const messages = validate(parameterInfo, 'demo123456')
 console.log(messages) 
 /* 
 SumorError
