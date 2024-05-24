@@ -1,7 +1,7 @@
 # validator
 
 A [Sumor Cloud](https://sumor.cloud) Tool.  
-[More Documentation](https://sumor.cloud)
+[More Documentation](https://sumor.cloud/validator)
 
 This is a lightweight validator for Node.JS.
 It can validate the input string or number based on the rules you defined.
