@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@jest/globals'
-import parseInfo from '../../src/parseInfo.js'
-import format from '../../src/number/format.js'
-import validate from '../../src/number/validate.js'
+import parseInfo from '../../src/validate/parseInfo.js'
+import format from '../../src/format/number.js'
+import validate from '../../src/validate/basic/number.js'
 
 describe('Number Validator', () => {
   it('validate length', () => {

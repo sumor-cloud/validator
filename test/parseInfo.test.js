@@ -1,5 +1,5 @@
 import { describe, expect, it } from '@jest/globals'
-import parseInfo from '../src/parseInfo.js'
+import parseInfo from '../src/validate/parseInfo.js'
 
 describe('parse info', () => {
   it('string', () => {
@@ -41,6 +41,13 @@ describe('parse info', () => {
     expect(result1.type).toEqual('number')
     expect(result1.required).toEqual(false)
     expect(result1.trim).toEqual(false)
-    expect(result1.decimal).toEqual(0)
+    expect(result1.decimal).toEqual(null)
+  })
+  it('array', () => {
+    const result1 = parseInfo({
+      type: 'array'
+    })
+    expect(result1.trim).toEqual(true)
+    expect(result1.decimal).toEqual(null)
   })
 })

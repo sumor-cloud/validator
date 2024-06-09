@@ -21,7 +21,7 @@ export default (info, value) => {
     return NaN
   }
 
-  if (info.decimal > 0) {
+  if (info.decimal !== null) {
     value = parseFloat(value.toFixed(info.decimal))
   }
 

@@ -71,7 +71,7 @@ console.log(value) // will print "demo", useless space will be removed
 - [optional] `trim` trim the string or not, default is true for string type
 - [optional] `lowerCase` convert the string to lowercase or not, default is false
 - [optional] `upperCase` convert the string to uppercase or not, default is false
-- [optional] `decimal` decimal for the number, default is 0 means no decimal
+- [optional] `decimal` decimal for the number, default is null, 0 means no decimal
 - [optional] `i18n` i18n for the error message, default is empty object, please refer to the following section for the detail
 - [optional] `error` output error or not, default is false
 

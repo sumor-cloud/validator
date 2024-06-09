@@ -9,15 +9,20 @@ export default info => {
 
   info.rule = info.rule || []
 
-  if (info.type === 'string') {
+  if (info.type === 'string' || info.type === 'array') {
     info.trim = info.trim !== false
   } else {
     info.trim = false
   }
 
-  if (info.type === 'number') {
-    info.decimal = parseInt(info.decimal)
-    if (isNaN(info.decimal)) info.decimal = 0
+  if (info.type === 'number' || info.type === 'array') {
+    if (info.decimal === undefined) {
+      info.decimal = null
+    }
+    if (info.decimal !== null) {
+      info.decimal = parseInt(info.decimal)
+      if (isNaN(info.decimal)) info.decimal = null
+    }
   }
 
   for (let i = 0; i < info.rule.length; i++) {

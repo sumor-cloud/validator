@@ -10,14 +10,5 @@ export default (info, value) => {
     messages.push('SUMOR_ARRAY_LENGTH')
   }
 
-  for (const rule of info.rule) {
-    if (rule.expression) {
-      const regexp = new RegExp(rule.expression)
-      if (!regexp.test(value)) {
-        messages.push(rule.code)
-      }
-    }
-  }
-
   return messages
 }

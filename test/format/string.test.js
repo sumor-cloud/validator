@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals'
-import parseInfo from '../../src/parseInfo.js'
-import format from '../../src/string/format.js'
+import parseInfo from '../../src/validate/parseInfo.js'
+import format from '../../src/format/string.js'
 
 describe('string formatter', () => {
   it('format trim', () => {

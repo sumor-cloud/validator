@@ -129,11 +129,21 @@ describe('entry', () => {
       ]
     }
     const messages1 = validate(info, ['demo!'])
-    expect(messages1).toEqual([{ code: 'RULE1', message: 'only allow a-z, A-Z, 0-9' }])
+    expect(messages1).toEqual([
+      {
+        code: 'SUMOR_ITEM_RULE_FAILED',
+        message: 'Item 1 validation failed',
+        errors: [{ code: 'RULE1', message: 'only allow a-z, A-Z, 0-9' }]
+      }
+    ])
 
-    const messages2 = validate(info, ['demo12'])
+    const messages2 = validate(info, ['demo1', 'demo12'])
     expect(messages2).toEqual([
-      { code: 'RULE2', message: 'value length must greater than 3 and less than 6' }
+      {
+        code: 'SUMOR_ITEM_RULE_FAILED',
+        message: 'Item 2 validation failed',
+        errors: [{ code: 'RULE2', message: 'value length must greater than 3 and less than 6' }]
+      }
     ])
 
     const info2 = {
@@ -150,7 +160,18 @@ describe('entry', () => {
     }
 
     const messages3 = validate(info2, [{ size: 10 * 1000 * 1000 + 1 }])
-    expect(messages3).toEqual([{ code: 'RULE1', message: 'file size must less than 10MB' }])
+    expect(messages3).toEqual([
+      {
+        code: 'SUMOR_ITEM_RULE_FAILED',
+        message: 'Item 1 validation failed',
+        errors: [
+          {
+            code: 'RULE1',
+            message: 'file size must less than 10MB'
+          }
+        ]
+      }
+    ])
   })
   it('number invalid check', () => {
     const info = {
@@ -233,13 +254,44 @@ describe('entry', () => {
     const info = {
       error: true,
       type: 'string',
-      required: true
+      required: true,
+      rule: [
+        {
+          code: 'RULE1',
+          expression: '^[a-zA-Z0-9]*$',
+          message: 'only allow a-z, A-Z, 0-9'
+        }
+      ]
     }
-    const value = ' '
-    const errors = validate(info, value)
-    const error = errors[0]
-    expect(error.name).toEqual('SumorError')
-    expect(error.code).toEqual('SUMOR_REQUIRED')
-    expect(error.message).toEqual(official.en.SUMOR_REQUIRED)
+    const errors1 = validate(info, ' ')
+    const error1 = errors1[0]
+    expect(error1.name).toEqual('SumorError')
+    expect(error1.code).toEqual('SUMOR_REQUIRED')
+    expect(error1.message).toEqual(official.en.SUMOR_REQUIRED)
+
+    const errors2 = validate(info, '123!')
+    const error2 = errors2[0]
+    expect(error2.name).toEqual('SumorError')
+    expect(error2.code).toEqual('RULE1')
+    expect(error2.message).toEqual('only allow a-z, A-Z, 0-9')
+
+    const info2 = {
+      type: 'array',
+      error: true,
+      rule: [
+        {
+          code: 'RULE1',
+          expression: '^[a-zA-Z0-9]*$',
+          message: 'only allow a-z, A-Z, 0-9'
+        }
+      ]
+    }
+    const errors3 = validate(info2, ['123!'])
+    const error3 = errors3[0]
+    expect(error3.name).toEqual('SumorError')
+    expect(error3.code).toEqual('SUMOR_ITEM_RULE_FAILED')
+    expect(error3.message).toEqual('Item 1 validation failed')
+    expect(error3.errors[0].code).toEqual('RULE1')
+    expect(error3.errors[0].message).toEqual('only allow a-z, A-Z, 0-9')
   })
 })

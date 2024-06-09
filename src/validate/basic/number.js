@@ -16,12 +16,5 @@ export default (info, value) => {
     messages.push('SUMOR_NUMBER_LENGTH')
   }
 
-  // for(let rule of info.rule){
-  //     const regexp = new RegExp(rule.expression)
-  //     if(!regexp.test(value)){
-  //         messages.push(rule.code)
-  //     }
-  // }
-
   return messages
 }

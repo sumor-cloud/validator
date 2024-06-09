@@ -1,6 +1,6 @@
 import { describe, expect, it } from '@jest/globals'
-import parseInfo from '../../src/parseInfo.js'
-import format from '../../src/number/format.js'
+import parseInfo from '../../src/validate/parseInfo.js'
+import format from '../../src/format/number.js'
 
 describe('number formatter', () => {
   it('format decimal', () => {
@@ -10,6 +10,11 @@ describe('number formatter', () => {
     expect(format(parseInfo({ type: 'number', decimal: 2 }), 1234567890.0163)).toEqual(
       1234567890.02
     )
+    expect(format(parseInfo({ type: 'number', decimal: 0 }), 1234567890.0163)).toEqual(1234567890)
+    expect(format(parseInfo({ type: 'number', decimal: 'wrong' }), 1234567890.0163)).toEqual(
+      1234567890.0163
+    )
+    expect(format(parseInfo({ type: 'number' }), 1234567890.0163)).toEqual(1234567890.0163)
   })
 
   it('format string', () => {

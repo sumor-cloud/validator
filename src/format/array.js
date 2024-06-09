@@ -27,7 +27,7 @@ export default (info, value) => {
     }
 
     if (typeof value[i] === 'number') {
-      if (info.decimal > 0) {
+      if (info.decimal !== null) {
         value[i] = parseFloat(value[i].toFixed(info.decimal))
       }
     }
