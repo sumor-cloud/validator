@@ -3,6 +3,11 @@ import stringFormat from './string/format.js'
 import stringValidate from './string/validate.js'
 import numberFormat from './number/format.js'
 import numberValidate from './number/validate.js'
+import arrayFormat from './array/format.js'
+import arrayValidate from './array/validate.js'
+import fileFormat from './file/format.js'
+import fileValidate from './file/validate.js'
+
 import getI18n from './i18n/index.js'
 import getError from './error/index.js'
 
@@ -18,6 +23,12 @@ const format = (info, value) => {
       break
     case 'number':
       formattedValue = numberFormat(info, value)
+      break
+    case 'array':
+      formattedValue = arrayFormat(info, value)
+      break
+    case 'file':
+      formattedValue = fileFormat(info, value)
       break
   }
 
@@ -46,13 +57,36 @@ const validate = (info, value, language = 'en-US') => {
         valueLength = parseInt(formattedValue, 10).toString().length
       }
       break
+    case 'array':
+      formattedValue = arrayFormat(info, value)
+      messages = arrayValidate(info, formattedValue)
+      if (formattedValue) {
+        valueLength = formattedValue.length
+      }
+      break
+    case 'file':
+      formattedValue = fileFormat(info, value)
+      messages = fileValidate(info, formattedValue)
+      if (formattedValue) {
+        valueLength = formattedValue.length
+      }
+      break
   }
 
   for (const rule of info.rule) {
     if (rule.function) {
-      const result = rule.function(formattedValue, info, language)
-      if (!result) {
-        messages.push(rule.code)
+      if (info.type === 'array' || info.type === 'file') {
+        for (const item of formattedValue) {
+          const result = rule.function(item, info, language)
+          if (!result) {
+            messages.push(rule.code)
+          }
+        }
+      } else {
+        const result = rule.function(formattedValue, info, language)
+        if (!result) {
+          messages.push(rule.code)
+        }
       }
     }
   }

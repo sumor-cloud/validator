@@ -109,6 +109,49 @@ describe('entry', () => {
       }
     ])
   })
+  it('rule for array and file', () => {
+    const info = {
+      type: 'array',
+      rule: [
+        // only allow a-z, A-Z, 0-9
+        {
+          code: 'RULE1',
+          expression: '^[a-zA-Z0-9]*$',
+          message: 'only allow a-z, A-Z, 0-9'
+        },
+        {
+          code: 'RULE2',
+          function: value => {
+            return value.length > 3 && value.length < 6
+          },
+          message: 'value length must greater than 3 and less than 6'
+        }
+      ]
+    }
+    const messages1 = validate(info, ['demo!'])
+    expect(messages1).toEqual([{ code: 'RULE1', message: 'only allow a-z, A-Z, 0-9' }])
+
+    const messages2 = validate(info, ['demo12'])
+    expect(messages2).toEqual([
+      { code: 'RULE2', message: 'value length must greater than 3 and less than 6' }
+    ])
+
+    const info2 = {
+      type: 'file',
+      rule: [
+        {
+          code: 'RULE1',
+          function: value => {
+            return value.size < 10 * 1000 * 1000
+          },
+          message: 'file size must less than 10MB'
+        }
+      ]
+    }
+
+    const messages3 = validate(info2, [{ size: 10 * 1000 * 1000 + 1 }])
+    expect(messages3).toEqual([{ code: 'RULE1', message: 'file size must less than 10MB' }])
+  })
   it('number invalid check', () => {
     const info = {
       type: 'number'
