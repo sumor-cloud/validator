@@ -142,7 +142,12 @@ describe('entry', () => {
       {
         code: 'SUMOR_ITEM_RULE_FAILED',
         message: 'Item 2 validation failed',
-        errors: [{ code: 'RULE2', message: 'value length must greater than 3 and less than 6' }]
+        errors: [
+          {
+            code: 'RULE2',
+            message: 'value length must greater than 3 and less than 6'
+          }
+        ]
       }
     ])
 
