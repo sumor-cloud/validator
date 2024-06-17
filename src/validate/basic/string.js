@@ -5,8 +5,10 @@ export default (info, value) => {
     messages.push('SUMOR_REQUIRED')
   }
 
-  if (info.length > 0 && value.length > info.length) {
-    messages.push('SUMOR_STRING_LENGTH')
+  if (value) {
+    if (info.length > 0 && value.length > info.length) {
+      messages.push('SUMOR_STRING_LENGTH')
+    }
   }
 
   return messages

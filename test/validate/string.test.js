@@ -4,6 +4,21 @@ import format from '../../src/format/string.js'
 import validate from '../../src/validate/basic/string.js'
 
 describe('String Validator', () => {
+  it('validator when value in different type', () => {
+    const parameterInfo = parseInfo({
+      type: 'string',
+      length: 10
+    })
+    const messages1 = validate(parameterInfo, format(parameterInfo, undefined))
+    expect(messages1).toEqual([])
+
+    const messages2 = validate(parameterInfo, format(parameterInfo, null))
+    expect(messages2).toEqual([])
+
+    const messages3 = validate(parameterInfo, format(parameterInfo, 0))
+    expect(messages3).toEqual([])
+  })
+
   it('validate not trim', () => {
     const parameterInfo = parseInfo({
       type: 'string',
