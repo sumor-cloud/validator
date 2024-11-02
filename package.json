@@ -1,7 +1,7 @@
 {
   "name": "@sumor/validator",
   "description": "This is a lightweight validator for Node.JS. It can validate the input string or number based on the rules you defined.",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "license": "MIT",
   "repository": "sumor-cloud/validator",
   "author": "Sumor Cloud Ltd",
