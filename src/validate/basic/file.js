@@ -1,4 +1,5 @@
 export default (info, value) => {
+  info = info || {}
   const messages = []
 
   if (info.multiple !== true) {
@@ -7,6 +8,9 @@ export default (info, value) => {
       return messages
     }
   } else {
+    if (value === undefined || value === null) {
+      value = []
+    }
     if (info.required && value.length === 0) {
       messages.push('SUMOR_REQUIRED')
       return messages
