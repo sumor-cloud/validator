@@ -3,7 +3,7 @@ export default (info, value) => {
   const messages = []
 
   if (info.multiple !== true) {
-    if (value === undefined || value === null) {
+    if (info.required && (value === undefined || value === null)) {
       messages.push('SUMOR_REQUIRED')
       return messages
     }
