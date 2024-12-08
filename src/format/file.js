@@ -1,6 +1,10 @@
 export default (info, value) => {
   if (value === undefined || value === null) {
-    value = []
+    if (info.multiple !== true) {
+      return null
+    } else {
+      return []
+    }
   }
 
   return value
