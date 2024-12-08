@@ -35,7 +35,11 @@ export default (info, value, language = 'en-US') => {
       break
     case 'file':
       messages = fileValidate(info, formattedValue)
-      valueLength = formattedValue.length
+      if (!formattedValue) {
+        valueLength = 0
+      } else {
+        valueLength = formattedValue.length
+      }
       break
   }
 
